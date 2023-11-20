@@ -51,12 +51,12 @@ class Playlist(Base):
         self._export(videos, export_type)
         return videos
 
-    def download_all_videos_of_playlist(self, playlist_id: str):
+    def download_all_videos_of_playlist(self, playlist_id: str, path_to_save_videos: str | Path):
         videos_info = self.retrieve_videos_info(playlist_id)
         for video in videos_info:
             self._downloader.download_video_by_id(
                 video,
-                Path(".") / "videos",
+                path_to_save_videos,
                 all_resolution=True
             )
 
