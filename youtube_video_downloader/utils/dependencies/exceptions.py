@@ -1,0 +1,6 @@
+class UnknowOperationalSystem(OSError):
+    ...
+
+
+class NotFoundAPackageManager(SystemError):
+    ...

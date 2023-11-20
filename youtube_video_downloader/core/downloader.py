@@ -1,4 +1,5 @@
 import sys
+import traceback
 from pathlib import Path
 
 from pytube import YouTube, Stream
@@ -112,7 +113,8 @@ class Downloader(Base):
         )
         sys.stdout.flush()
 
-    def _put_audio_in_video(self, video_path: str, audio_path: str):
+    @staticmethod
+    def _put_audio_in_video(video_path: str, audio_path: str):
         try:
             video = VideoFileClip(video_path)
             audio = AudioFileClip(audio_path)
@@ -128,14 +130,10 @@ class Downloader(Base):
         except Exception as e:
             err_msg = str(e)
 
-            if "THE SYSTEM CAN NOT FIND THE FILE SPECIFIED" in err_msg.upper():
-                # TODO - make program download ffmeg for correct platform if not has it on system
-                pass
+            print(traceback.format_exc())
+            print(err_msg)
 
-                return self._put_audio_in_video(video_path, audio_path)
-
-            # file is corrupt, deleting him
-            # TODO - identify what file is corrupt and delete him
+            remove_file(video_path)
 
     def _format_video_info(self, video: PlaylistItem) -> VideoInfo:
         pass
