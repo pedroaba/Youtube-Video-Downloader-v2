@@ -28,7 +28,13 @@ class Playlist(Base):
         super(Playlist, self).__init__(api_key=api_key)
         self._downloader = Downloader(api_key=api_key)
 
-    def retrieve_videos_info(self, playlist_id: str, *, export_type: AvailableExportType = "csv"):
+    def retrieve_videos_info(
+            self,
+            playlist_id: str,
+            *,
+            export_type: AvailableExportType = "csv",
+            exports: bool = False
+    ):
         logger.info(f"Starting listing of playlist: {playlist_id}")
         playlist_response = self._retrive_videos_from_playlist(playlist_id)
 
@@ -48,7 +54,8 @@ class Playlist(Base):
             if quantity_of_videos_retrieved < Playlist.MAX_OF_RETRIEVE:
                 break
 
-        self._export(videos, export_type)
+        if exports:
+            self._export(videos, export_type)
         return videos
 
     def download_all_videos_of_playlist(self, playlist_id: str, path_to_save_videos: str | Path):
