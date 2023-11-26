@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "youtube-video-downloader"
-version = "0.1.0"
+version = "0.0.1"
 description = ""
 authors = ["Pedro Augusto Barbosa Aparecido <pedr.augustobarbosa.aparecido@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.13"
 google-api-python-client = "^2.108.0"
 google-auth-oauthlib = "^1.1.0"
 google-auth-httplib2 = "^0.1.1"
@@ -27,6 +27,10 @@ ffmpeg = "^1.4"
 ffmpeg-python = "^0.2.0"
 more-itertools = "^10.1.0"
 aioitertools = "^0.11.0"
+pillow = "^10.1.0"
+plyer = "^2.1.0"
+winotify = "^1.1.0"
+psgtray = "^1.0.2"
 
 
 [tool.poetry.group.examples.dependencies]
